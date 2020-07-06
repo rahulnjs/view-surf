@@ -1,0 +1,15 @@
+body {
+    padding: 0px;
+    margin: 0px;
+    background-color: #303341;
+    overflow: hidden;
+}
+
+
+.app {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+    flex-grow: 1;
+    flex-wrap: wrap;
+}

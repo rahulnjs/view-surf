@@ -1,0 +1,34 @@
+.editor {
+    flex: 1;
+
+    .tabs {
+        display: flex;
+
+        .tab {
+            background-color: #282a36;
+            padding: 5px;
+            color: gray;
+            cursor: pointer;
+            font-family: "Open Sans", serif;
+            font-size: 0.8rem;
+            width: 70px;
+            border-left: 1px solid #303030;
+            border-bottom: 1px solid #303030;
+            padding-left: 10px;
+            font-weight: 600;
+        }
+
+        .active {
+            color: #fff !important;
+            border-bottom: none !important;
+            box-shadow: inset 0px 20px 11px -1px rgba(0, 0, 0, 0.7);
+        }
+    }
+
+    .settings {
+        position: absolute;
+        right: 4px;
+        top: 2px;
+        color: #fff;
+    }
+}
