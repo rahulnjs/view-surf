@@ -42,7 +42,7 @@ function _editor(props) {
         setTimeout(() => {
             let lang = props.lang === 'js' ? 'javascript' : props.lang;
             editor = window.ace.edit(props.lang);
-            editor.setTheme("ace/theme/dracula");
+            editor.setTheme('ace/theme/dracula');
             editor.session.setMode("ace/mode/" + lang);
             editor.renderer.setShowGutter(true);
             editor.getSession().setUseWrapMode(true);
@@ -60,9 +60,11 @@ function _editor(props) {
             });
 
 
-            editor.setValue(props.lang);
+            editor.setValue(window.localStorage[lang]);
 
             window[props.lang] = editor;
+
+            render();
         }, 500);
     }, []);
 
@@ -79,11 +81,21 @@ function _editor(props) {
         document.getElementById('html-output').innerHTML = '<div>' + objToRender.html + '</div>';
         try {
             eval(objToRender.js);
-        } catch(e) {
-            console.log(e);
-        }
-        console.log(objToRender.css);
-        document.getElementById('--style').innerHTML = objToRender.css;
+        } catch(e) {}
+        document.getElementById('--style').innerHTML = objToRender.css; //normalize(objToRender.css);
+    }
+
+    function normalize(css) {
+        return css.split('\n').map(l => {
+            l = l.trim();
+            
+            console.log(l);
+            if(l.endsWith('{')) {
+                return '#html-output ' + l;
+            } else {
+                return l;
+            }
+        }).join('\n');
     }
 
     return (

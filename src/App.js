@@ -8,7 +8,7 @@ function App() {
   var _log = window.console.log;
 
   window.console.log = function(l) {
-    document.getElementById('console').innerHTML = l;
+    document.getElementById('console-dump').innerHTML += l + '<br>';
   } 
 
   return (
