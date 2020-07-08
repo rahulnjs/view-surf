@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8" />
-  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+  <link rel="icon" href="/favicon.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#000000" />
   <meta name="description" content="write, run test HTML, CSS, JS" />
@@ -13,8 +13,18 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.7/ace.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.7/ext-language_tools.js"></script>
-  <title>ViewSurf</title>
+  <title>ViewSurf: Offline HTML Editor</title>
   <style id="--style"></style>
+  <style>
+    .op {
+      padding: 2px 0px 2px 5px;
+      font-size: .8rem;
+    }
+
+    .op::before {
+      content: '> ';
+    }
+  </style>
 </head>
 
 <body>
@@ -46,7 +56,6 @@
       var screenHeight = window.screen.height;
       var editorHeight = document.getElementById('editor').offsetHeight;
       document.getElementById('html-output').style.flexBasis = (screenHeight - editorHeight - 150) + 'px';
-      //document.getElementById('console').style.height = (document.getElementById('html-output').offsetHeight + 16) + 'px';
     }, 1000);
 
 

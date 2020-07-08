@@ -12,6 +12,11 @@ export default function Editor() {
         </div>
     ));
 
+    function toggleView() {
+
+    }
+
+
     return (
         <div className="editor" id="editor">
             <div className="tabs">
@@ -25,7 +30,7 @@ export default function Editor() {
                     Javascript
                 </div>
                 <div className="settings">
-                    &#9728;
+                    <img src="https://image.flaticon.com/icons/svg/38/38407.svg" alt="change view" onClick={() => toggleView()}/>
                 </div>
             </div>
             <div id="editors">
@@ -51,7 +56,7 @@ function _editor(props) {
 
             editor.setOptions({
                 fontFamily: "'Fira Code', monospace",
-                fontSize: "20px",
+                fontSize: "18px",
                 maxLines: 15,
                 minLines: 15,
                 useWorker: false,
@@ -60,7 +65,7 @@ function _editor(props) {
             });
 
 
-            editor.setValue(window.localStorage[lang]);
+            //editor.setValue(window.localStorage[lang]);
 
             window[props.lang] = editor;
 

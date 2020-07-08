@@ -7,9 +7,12 @@ function App() {
 
   var _log = window.console.log;
 
-  window.console.log = function(l) {
-    document.getElementById('console-dump').innerHTML += l + '<br>';
-  } 
+  window.console.log = dump;
+
+
+  function dump(l) {
+    document.getElementById('console-dump').innerHTML += '<div class="op">' + l + '</div>';
+  }
 
   return (
     <div className="app">
