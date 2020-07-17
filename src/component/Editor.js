@@ -1,22 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../style/editor.scss'
 
-export default function Editor() {
-
+export default function Editor(props) {
     const [editorToShow, setEditorToShow] = useState('html')
-
-
     let _editors = ['html', 'css', 'js'].map(l => (
         <div key={l} className="--editor" style={{ display: editorToShow === l ? 'block' : 'none' }}>
-            <_editor lang={l} />
+            <_Editor toRender={props.onRender} lang={l} />
         </div>
     ));
 
     function toggleView() {
-
     }
-
-
     return (
         <div className="editor" id="editor">
             <div className="tabs">
@@ -40,7 +34,7 @@ export default function Editor() {
     );
 }
 
-function _editor(props) {
+function _Editor(props) {
     let editor;
 
     useEffect(() => {
@@ -63,10 +57,6 @@ function _editor(props) {
                 enableBasicAutocompletion: true,
                 enableLiveAutocompletion: true
             });
-
-
-            //editor.setValue(window.localStorage[lang]);
-
             window[props.lang] = editor;
 
             render();
@@ -76,31 +66,13 @@ function _editor(props) {
     function render() {
         let _e = window[props.lang];
         window.localStorage.setItem(props.lang, _e.getValue());
-
         var objToRender = {};
         for(var lang of ['html', 'css', 'js']){
             var _v = window.localStorage[lang];
             objToRender[lang] = _v ? _v : '';
         }
-
-        document.getElementById('html-output').innerHTML = '<div>' + objToRender.html + '</div>';
-        try {
-            eval(objToRender.js);
-        } catch(e) {}
-        document.getElementById('--style').innerHTML = objToRender.css; //normalize(objToRender.css);
-    }
-
-    function normalize(css) {
-        return css.split('\n').map(l => {
-            l = l.trim();
-            
-            console.log(l);
-            if(l.endsWith('{')) {
-                return '#html-output ' + l;
-            } else {
-                return l;
-            }
-        }).join('\n');
+        // objToRender.css = normalize(objToRender.css);
+        props.toRender(objToRender);
     }
 
     return (
