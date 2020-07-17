@@ -6,6 +6,7 @@ export default function HTMLOutput(props) {
     const [hideConsoleBtn, setHideCloseBtn] = useState(false);
     const consoleRef = useRef();
     const resultsRef = useRef();
+    const dumpRef = useRef();
 
   
 
@@ -29,7 +30,16 @@ export default function HTMLOutput(props) {
             </script>
             `);
         resultsRef.current.contentWindow.document.close();
+        resultsRef.current.contentWindow.console.log = dump;
     }
+
+    
+
+    function dump(l) {
+        dumpRef.current.innerHTML += '<div class="op">' + l + '</div>';
+    }
+
+
     return (
     <> <iframe ref={resultsRef} title='Result' src="" className='result-frame'></iframe>
         <div id="console" ref={consoleRef} className={hideConsoleBtn  ? 'act' : ''}>
@@ -40,7 +50,7 @@ export default function HTMLOutput(props) {
                     }
                 </span>
             </div>
-            <div id="console-dump">
+            <div id="console-dump" ref={dumpRef}>
             </div>
         </div>
     </>

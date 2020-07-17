@@ -11,11 +11,6 @@ function App() {
   const [css, setCss] = useState(``);
   const [js, setJs] = useState(``);
 
-  window.console.log = dump;
-  function dump(l) {
-    document.getElementById('console-dump').innerHTML += '<div class="op">' + l + '</div>';
-  }
-
   function setOutput({html, css, js}) {
 
     if(html) {
