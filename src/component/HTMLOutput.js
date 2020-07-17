@@ -1,26 +1,29 @@
-import React, {Fragment, useState} from 'react';
+import React, {Fragment, useState, useRef} from 'react';
 import styles from '../style/html-output.scss';
 
-export default function HTMLOutput() {
+export default function HTMLOutput(props) {
 
     const [hideConsoleBtn, setHideCloseBtn] = useState(false);
+    const outPutRef = useRef();
+    const consoleRef = useRef();
 
     function toggleConsole() {
         let show = !hideConsoleBtn;
         let height = '20';
         if(show) {
-            height = (document.getElementById('html-output').offsetHeight + 16);
+            height = (outPutRef.current.offsetHeight + 16);
         } 
-        document.getElementById('console').style.height = height + 'px';
+        consoleRef.current.style.height = height + 'px';
         setHideCloseBtn(show);
     }
-
     return (
     <>
-        <div className="html-output" id="html-output">
-            
+    <style>
+        {props.css}
+    </style>
+        <div className="html-output" ref={outPutRef} id="html-output" dangerouslySetInnerHTML={{ __html: props.render }}>
         </div>
-        <div id="console" className={hideConsoleBtn  ? 'act' : ''}>
+        <div id="console" ref={consoleRef} className={hideConsoleBtn  ? 'act' : ''}>
             <div id="console-header">
                 <span onClick={() => toggleConsole()}>Console
                     {
@@ -29,7 +32,6 @@ export default function HTMLOutput() {
                 </span>
             </div>
             <div id="console-dump">
-
             </div>
         </div>
     </>
