@@ -13,3 +13,9 @@ body {
     flex-grow: 1;
     flex-wrap: wrap;
 }
+
+.result-frame {
+    background: white;
+    height: 55vh; // TODO: remove fix size
+    width: 100%;
+}

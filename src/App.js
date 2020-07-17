@@ -9,23 +9,29 @@ function App() {
   const dumpRef = useRef();
   const [html, setHtml] = useState(``);
   const [css, setCss] = useState(``);
+  const [js, setJs] = useState(``);
 
   window.console.log = dump;
   function dump(l) {
     document.getElementById('console-dump').innerHTML += '<div class="op">' + l + '</div>';
   }
 
-  function setOutput({html, css}) {
+  function setOutput({html, css, js}) {
 
     if(html) {
       setHtml(html)
     }
 
     if(css) {
-      console.log(css)
       setCss(css);
     } else {
       setCss('')
+    }
+
+    if(js) {
+      setJs(js);
+    } else {
+      setJs('')
     }
   }
 
@@ -34,7 +40,7 @@ function App() {
   return (
     <div className="app">
         <Editor onRender={setOutput}/>
-        <HTMLOutput render={html} css={css}/>
+        <HTMLOutput html={html} css={css} js={js}/>
     </div>
   );
 }

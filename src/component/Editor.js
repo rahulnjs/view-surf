@@ -2,10 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from '../style/editor.scss'
 
 export default function Editor(props) {
-
     const [editorToShow, setEditorToShow] = useState('html')
-
-
     let _editors = ['html', 'css', 'js'].map(l => (
         <div key={l} className="--editor" style={{ display: editorToShow === l ? 'block' : 'none' }}>
             <_Editor toRender={props.onRender} lang={l} />
@@ -13,10 +10,7 @@ export default function Editor(props) {
     ));
 
     function toggleView() {
-
     }
-
-
     return (
         <div className="editor" id="editor">
             <div className="tabs">
@@ -63,10 +57,6 @@ function _Editor(props) {
                 enableBasicAutocompletion: true,
                 enableLiveAutocompletion: true
             });
-
-
-            //editor.setValue(window.localStorage[lang]);
-
             window[props.lang] = editor;
 
             render();
@@ -76,28 +66,13 @@ function _Editor(props) {
     function render() {
         let _e = window[props.lang];
         window.localStorage.setItem(props.lang, _e.getValue());
-
         var objToRender = {};
         for(var lang of ['html', 'css', 'js']){
             var _v = window.localStorage[lang];
             objToRender[lang] = _v ? _v : '';
         }
-        objToRender.css = normalize(objToRender.css);
+        // objToRender.css = normalize(objToRender.css);
         props.toRender(objToRender);
-        try {
-            eval(objToRender.js);
-        } catch(e) {}
-    }
-
-    function normalize(css) {
-        return css.split('\n').map(l => {
-            l = l.trim();
-            if(l.endsWith('{')) {
-                return '#html-output ' + l;
-            } else {
-                return l;
-            }
-        }).join('\n');
     }
 
     return (
