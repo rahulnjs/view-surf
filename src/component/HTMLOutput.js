@@ -10,22 +10,25 @@ export default function HTMLOutput({html, css, js}) {
     const [srcDoc, setSrcDoc] = useState('HTML CSS & JS!!');
 
     setTimeout(() => {
+        if(dumpRef.current) {
+            dumpRef.current.innerHTML = '';
+        }
         setSrcDoc(`
         <style>
             ${css}
         </style>
         ${html}
         <script>
-            window.console.log = parent.window.console.log;
+            window.console.log = parent.window.dump;
             window.console.error = window.console.log;
             try {
                 ${js}
             } catch(e) {}
         </script>
         `);
-    }, 20);
+    }, 5);
 
-    window.console.log = function dump(l) {
+    window.dump = function(l) {
         dumpRef.current.innerHTML += '<div class="op">' + l + '</div>';
     };
   
