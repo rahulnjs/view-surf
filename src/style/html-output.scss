@@ -13,6 +13,8 @@
     background: #303341;
     bottom: 0px;
     width: 100%;
+    z-index: 100;
+    transition: all .2s ease-in;
 }
 
 .act {
@@ -26,6 +28,10 @@
     padding-left: 4px;
     padding-top: 1px;
     line-height: 20px;
+    border-bottom: 1px solid #4e4e4e;
+    position: fixed;
+    width: 100%;
+    background-color: #303341;
 
     span {
         cursor: pointer;
@@ -47,4 +53,9 @@
     color: #fff;
     font-family: 'Fira Code';
     font-size: .9rem;
+    padding-top: 25px;
+}
+
+.result-frame {
+    border: 1px solid #303341;
 }
