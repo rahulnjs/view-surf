@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import Editor from './component/Editor';
 import HTMLOutput from './component/HTMLOutput';
+import Header from './component/header/Header'
 import css from './app.scss';
 
 function App() {
@@ -33,10 +34,13 @@ function App() {
 
 
   return (
+    <>
+    <Header></Header>
     <div className="app">
         <Editor onRender={setOutput}/>
         <HTMLOutput html={html} css={css} js={js}/>
     </div>
+    </>
   );
 }
 

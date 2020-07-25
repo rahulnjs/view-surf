@@ -1,0 +1,51 @@
+@import '../../variables.scss';
+$header-bg: $editor-black;
+$nav-color: $white;
+
+.nav-header {
+    width: 100%;
+    display: flex;
+    align-items: center;;
+    min-height: 40px;
+    padding: 5px;
+    padding-left: 10px;
+}
+.header-bg {
+    background: $header-bg;
+}
+
+.nav-brand {
+    font-weight: 300;
+    font-family: "Open sans";
+    font-size: 1.3rem;
+    cursor: pointer;
+    &:hover {
+        text-shadow: 1px 3px 9px $white;
+    }
+}
+.nav-child {
+    color: $nav-color
+}
+
+.side-bar {
+    height: 100vh;
+    width: 50px;
+    background-color: $header-bg;
+    color: $white;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    align-items: center;
+    
+    .side-elements {
+        color: $white;
+        padding-top: 10px;
+        cursor: pointer;
+    }
+
+    .bi-plus-square-fill {
+        &:hover{
+            fill: $lighter;
+        }
+    }
+}

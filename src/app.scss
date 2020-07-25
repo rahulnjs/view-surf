@@ -3,6 +3,7 @@ body {
     margin: 0px;
     background-color: #303341;
     overflow: hidden;
+    font-family: 'Open Sans';
 }
 
 
@@ -12,6 +13,11 @@ body {
     height: 100%;
     flex-grow: 1;
     flex-wrap: wrap;
+    padding-left: 50px;
+}
+
+.d-none {
+    display: none !important;
 }
 
 .result-frame {
