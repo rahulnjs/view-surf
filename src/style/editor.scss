@@ -3,6 +3,7 @@
 
     .tabs {
         display: flex;
+        position: relative;
 
         .tab {
             background-color: #282a36;
@@ -16,6 +17,17 @@
             border-bottom: 1px solid #303030;
             padding-left: 10px;
             font-weight: 600;
+        }
+
+        .settings {
+            position: absolute;
+            right: 1%;
+            top: 10%;
+            color: #eee;
+
+            &:hover {
+                color: white;
+            }
         }
 
         .active {
