@@ -1,8 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import styles from '../style/editor.scss'
+import styles from '../style/editor.scss';
+import { connect } from 'react-redux';
+
+
+function mapStateToProps(stateValue) {
+   return { mode: stateValue.darkMode }
+}
 
 export default function Editor(props) {
-    const [editorToShow, setEditorToShow] = useState('html')
+    const [editorToShow, setEditorToShow] = useState('html');
+
     let _editors = ['html', 'css', 'js'].map(l => (
         <div key={l} className="--editor" style={{ display: editorToShow === l ? 'block' : 'none' }}>
             <_Editor toRender={props.onRender} lang={l} />
@@ -34,14 +41,24 @@ export default function Editor(props) {
     );
 }
 
-function _Editor(props) {
+const _LineEditor = (props) => {
     let editor;
+    const mode = props.mode;
+    const themes = ['ace/theme/dracula', 'ace/theme/github'];
+    let selectedTheme = themes[1]; 
+    if(mode) {
+        selectedTheme = themes[0];
+    } else {
+        selectedTheme = themes[1];
+    }
 
-    useEffect(() => {
-        setTimeout(() => {
-            let lang = props.lang === 'js' ? 'javascript' : props.lang;
+    
+    
+
+    function configEditor() {
+        let lang = props.lang === 'js' ? 'javascript' : props.lang;
             editor = window.ace.edit(props.lang);
-            editor.setTheme('ace/theme/dracula');
+            editor.setTheme(selectedTheme);
             editor.session.setMode("ace/mode/" + lang);
             editor.renderer.setShowGutter(true);
             editor.getSession().setUseWrapMode(true);
@@ -58,10 +75,15 @@ function _Editor(props) {
                 enableLiveAutocompletion: true
             });
             window[props.lang] = editor;
-
-            render();
+            render()
+    }
+    // configEditor();
+    useEffect(() => {
+        console.log(props.mode);
+        setTimeout(() => {
+            configEditor();
         }, 500);
-    }, []);
+    }, [props.mode]);
 
     function render() {
         let _e = window[props.lang];
@@ -74,8 +96,9 @@ function _Editor(props) {
         // objToRender.css = normalize(objToRender.css);
         props.toRender(objToRender);
     }
-
     return (
         <div key={props.lang} id={props.lang} onKeyUp={render}></div>
     );
 }
+
+const _Editor = connect(mapStateToProps, null)(_LineEditor)
